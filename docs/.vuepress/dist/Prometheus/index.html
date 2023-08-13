@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="generator" content="VuePress 2.0.0-beta.66">
+    <style>
+      :root {
+        --c-bg: #fff;
+      }
+      html.dark {
+        --c-bg: #22272e;
+      }
+      html, body {
+        background-color: var(--c-bg);
+      }
+    </style>
+    <script>
+      const userMode = localStorage.getItem('vuepress-color-scheme');
+			const systemDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+			if (userMode === 'dark' || (userMode !== 'light' && systemDarkMode)) {
+				document.documentElement.classList.toggle('dark', true);
+			}
+    </script>
+    <title>Prometheus | 壹拾陆</title><meta name="description" content="这是壹拾陆的博客网站">
+    <link rel="preload" href="/assets/style-bfa9ed7e.css" as="style"><link rel="stylesheet" href="/assets/style-bfa9ed7e.css">
+    <link rel="modulepreload" href="/assets/app-685742c3.js"><link rel="modulepreload" href="/assets/index.html-96ee3146.js"><link rel="modulepreload" href="/assets/index.html-eb4ee7f0.js"><link rel="prefetch" href="/assets/index.html-d7a6ab49.js" as="script"><link rel="prefetch" href="/assets/index.html-da509c22.js" as="script"><link rel="prefetch" href="/assets/start.html-7d4a4848.js" as="script"><link rel="prefetch" href="/assets/starts.html-55cdd281.js" as="script"><link rel="prefetch" href="/assets/startss.html-b864683c.js" as="script"><link rel="prefetch" href="/assets/index.html-08f57b9c.js" as="script"><link rel="prefetch" href="/assets/404.html-f9875e7b.js" as="script"><link rel="prefetch" href="/assets/index.html-08dc9dfa.js" as="script"><link rel="prefetch" href="/assets/index.html-953e2aa5.js" as="script"><link rel="prefetch" href="/assets/start.html-cabb5a48.js" as="script"><link rel="prefetch" href="/assets/starts.html-561d1967.js" as="script"><link rel="prefetch" href="/assets/startss.html-84ed41cd.js" as="script"><link rel="prefetch" href="/assets/index.html-3b123f71.js" as="script"><link rel="prefetch" href="/assets/404.html-d01d14ff.js" as="script">
+  </head>
+  <body>
+    <div id="app"><!--[--><div class="theme-container"><!--[--><header class="navbar"><div class="toggle-sidebar-button" title="toggle sidebar" aria-expanded="false" role="button" tabindex="0"><div class="icon" aria-hidden="true"><span></span><span></span><span></span></div></div><span><a href="/" class=""><!----><span class="site-name">壹拾陆</span></a></span><div class="navbar-items-wrapper" style=""><!--[--><!--]--><nav class="navbar-items can-hide"><!--[--><div class="navbar-item"><a aria-current="page" href="/prometheus/" class="router-link-active router-link-exact-active" aria-label="Prometheus"><!--[--><!--]--> Prometheus <!--[--><!--]--></a></div><div class="navbar-item"><a href="/kube/" class="" aria-label="Kubernetes"><!--[--><!--]--> Kubernetes <!--[--><!--]--></a></div><div class="navbar-item"><a href="/linux/" class="" aria-label="Linux"><!--[--><!--]--> Linux <!--[--><!--]--></a></div><div class="navbar-item"><a href="/vuepress/" class="" aria-label="Vuepress"><!--[--><!--]--> Vuepress <!--[--><!--]--></a></div><!--]--></nav><!--[--><!--]--><button class="toggle-color-mode-button" title="toggle color mode"><svg style="" class="icon" focusable="false" viewBox="0 0 32 32"><path d="M16 12.005a4 4 0 1 1-4 4a4.005 4.005 0 0 1 4-4m0-2a6 6 0 1 0 6 6a6 6 0 0 0-6-6z" fill="currentColor"></path><path d="M5.394 6.813l1.414-1.415l3.506 3.506L8.9 10.318z" fill="currentColor"></path><path d="M2 15.005h5v2H2z" fill="currentColor"></path><path d="M5.394 25.197L8.9 21.691l1.414 1.415l-3.506 3.505z" fill="currentColor"></path><path d="M15 25.005h2v5h-2z" fill="currentColor"></path><path d="M21.687 23.106l1.414-1.415l3.506 3.506l-1.414 1.414z" fill="currentColor"></path><path d="M25 15.005h5v2h-5z" fill="currentColor"></path><path d="M21.687 8.904l3.506-3.506l1.414 1.415l-3.506 3.505z" fill="currentColor"></path><path d="M15 2.005h2v5h-2z" fill="currentColor"></path></svg><svg style="display:none;" class="icon" focusable="false" viewBox="0 0 32 32"><path d="M13.502 5.414a15.075 15.075 0 0 0 11.594 18.194a11.113 11.113 0 0 1-7.975 3.39c-.138 0-.278.005-.418 0a11.094 11.094 0 0 1-3.2-21.584M14.98 3a1.002 1.002 0 0 0-.175.016a13.096 13.096 0 0 0 1.825 25.981c.164.006.328 0 .49 0a13.072 13.072 0 0 0 10.703-5.555a1.01 1.01 0 0 0-.783-1.565A13.08 13.08 0 0 1 15.89 4.38A1.015 1.015 0 0 0 14.98 3z" fill="currentColor"></path></svg></button><form class="search-box" role="search"><input type="search" placeholder="搜索" autocomplete="off" spellcheck="false" value><!----></form></div></header><!--]--><div class="sidebar-mask"></div><!--[--><aside class="sidebar"><nav class="navbar-items"><!--[--><div class="navbar-item"><a aria-current="page" href="/prometheus/" class="router-link-active router-link-exact-active" aria-label="Prometheus"><!--[--><!--]--> Prometheus <!--[--><!--]--></a></div><div class="navbar-item"><a href="/kube/" class="" aria-label="Kubernetes"><!--[--><!--]--> Kubernetes <!--[--><!--]--></a></div><div class="navbar-item"><a href="/linux/" class="" aria-label="Linux"><!--[--><!--]--> Linux <!--[--><!--]--></a></div><div class="navbar-item"><a href="/vuepress/" class="" aria-label="Vuepress"><!--[--><!--]--> Vuepress <!--[--><!--]--></a></div><!--]--></nav><!--[--><!--]--><ul class="sidebar-items"><!--[--><li><p tabindex="0" class="sidebar-item sidebar-heading">Prometheus <!----></p><ul style="" class="sidebar-item-children"><!--[--><li><a aria-current="page" href="/Prometheus/#一、prometheus监控介绍" class="router-link-active router-link-exact-active sidebar-item" aria-label="一、Prometheus监控介绍"><!--[--><!--]--> 一、Prometheus监控介绍 <!--[--><!--]--></a><ul style="" class="sidebar-item-children"><!--[--><li><a aria-current="page" href="/Prometheus/#_1、概述" class="router-link-active router-link-exact-active sidebar-item" aria-label="1、概述"><!--[--><!--]--> 1、概述 <!--[--><!--]--></a><!----></li><li><a aria-current="page" href="/Prometheus/#_2、特点" class="router-link-active router-link-exact-active sidebar-item" aria-label="2、特点"><!--[--><!--]--> 2、特点 <!--[--><!--]--></a><!----></li><li><a aria-current="page" href="/Prometheus/#_3、核心组件" class="router-link-active router-link-exact-active sidebar-item" aria-label="3、核心组件"><!--[--><!--]--> 3、核心组件 <!--[--><!--]--></a><!----></li><li><a aria-current="page" href="/Prometheus/#_4、基础架构" class="router-link-active router-link-exact-active sidebar-item" aria-label="4、基础架构"><!--[--><!--]--> 4、基础架构 <!--[--><!--]--></a><!----></li><li><a aria-current="page" href="/Prometheus/#_5、prometheus与zabbix的对比" class="router-link-active router-link-exact-active sidebar-item" aria-label="5、Prometheus与Zabbix的对比"><!--[--><!--]--> 5、Prometheus与Zabbix的对比 <!--[--><!--]--></a><!----></li><li><a aria-current="page" href="/Prometheus/#_6、总结" class="router-link-active router-link-exact-active sidebar-item" aria-label="6、总结"><!--[--><!--]--> 6、总结 <!--[--><!--]--></a><!----></li><!--]--></ul></li><li><a aria-current="page" href="/Prometheus/#二、二进制安装prometheus-grafana" class="router-link-active router-link-exact-active sidebar-item" aria-label="二、二进制安装Prometheus+Grafana"><!--[--><!--]--> 二、二进制安装Prometheus+Grafana <!--[--><!--]--></a><ul style="" class="sidebar-item-children"><!--[--><li><a aria-current="page" href="/Prometheus/#_1、环境" class="router-link-active router-link-exact-active sidebar-item" aria-label="1、环境"><!--[--><!--]--> 1、环境 <!--[--><!--]--></a><!----></li><li><a aria-current="page" href="/Prometheus/#_2、-从官网手动安装" class="router-link-active router-link-exact-active sidebar-item" aria-label="2、 从官网手动安装"><!--[--><!--]--> 2、 从官网手动安装 <!--[--><!--]--></a><!----></li><!--]--></ul></li><li><a aria-current="page" href="/Prometheus/#三、使用grafana9-5-1展示prometheus的图形" class="router-link-active router-link-exact-active sidebar-item" aria-label="三、使用Grafana9.5.1展示Prometheus的图形"><!--[--><!--]--> 三、使用Grafana9.5.1展示Prometheus的图形 <!--[--><!--]--></a><ul style="" class="sidebar-item-children"><!--[--><li><a aria-current="page" href="/Prometheus/#_1、登录grafana" class="router-link-active router-link-exact-active sidebar-item" aria-label="1、登录Grafana"><!--[--><!--]--> 1、登录Grafana <!--[--><!--]--></a><!----></li><li><a aria-current="page" href="/Prometheus/#_2、创建-prometheus-数据源" class="router-link-active router-link-exact-active sidebar-item" aria-label="2、创建 Prometheus 数据源"><!--[--><!--]--> 2、创建 Prometheus 数据源 <!--[--><!--]--></a><!----></li><li><a aria-current="page" href="/Prometheus/#_3、创建仪表盘" class="router-link-active router-link-exact-active sidebar-item" aria-label="3、创建仪表盘"><!--[--><!--]--> 3、创建仪表盘 <!--[--><!--]--></a><!----></li><!--]--></ul></li><li><a aria-current="page" href="/Prometheus/#四、docker搭建prometheus监控系统" class="router-link-active router-link-exact-active sidebar-item" aria-label="四、Docker搭建Prometheus监控系统"><!--[--><!--]--> 四、Docker搭建Prometheus监控系统 <!--[--><!--]--></a><ul style="" class="sidebar-item-children"><!--[--><li><a aria-current="page" href="/Prometheus/#_1、环境-1" class="router-link-active router-link-exact-active sidebar-item" aria-label="1、环境"><!--[--><!--]--> 1、环境 <!--[--><!--]--></a><!----></li><li><a aria-current="page" href="/Prometheus/#_2、docker-compose安装prometheus" class="router-link-active router-link-exact-active sidebar-item" aria-label="2、Docker-compose安装Prometheus"><!--[--><!--]--> 2、Docker-compose安装Prometheus <!--[--><!--]--></a><!----></li><!--]--></ul></li><li><a aria-current="page" href="/Prometheus/#五、使用grafana9-4-3展示prometheus的图形" class="router-link-active router-link-exact-active sidebar-item" aria-label="五、使用Grafana9.4.3展示Prometheus的图形"><!--[--><!--]--> 五、使用Grafana9.4.3展示Prometheus的图形 <!--[--><!--]--></a><ul style="" class="sidebar-item-children"><!--[--><li><a aria-current="page" href="/Prometheus/#_1、登录grafana-1" class="router-link-active router-link-exact-active sidebar-item" aria-label="1、登录Grafana"><!--[--><!--]--> 1、登录Grafana <!--[--><!--]--></a><!----></li><li><a aria-current="page" href="/Prometheus/#_2、创建-prometheus-数据源-1" class="router-link-active router-link-exact-active sidebar-item" aria-label="2、创建 Prometheus 数据源"><!--[--><!--]--> 2、创建 Prometheus 数据源 <!--[--><!--]--></a><!----></li><li><a aria-current="page" href="/Prometheus/#_3、创建仪表盘-1" class="router-link-active router-link-exact-active sidebar-item" aria-label="3、创建仪表盘"><!--[--><!--]--> 3、创建仪表盘 <!--[--><!--]--></a><!----></li><!--]--></ul></li><li><a aria-current="page" href="/Prometheus/#六、prometheus相关概念" class="router-link-active router-link-exact-active sidebar-item" aria-label="六、Prometheus相关概念"><!--[--><!--]--> 六、Prometheus相关概念 <!--[--><!--]--></a><ul style="" class="sidebar-item-children"><!--[--><li><a aria-current="page" href="/Prometheus/#_1、理解时间序列" class="router-link-active router-link-exact-active sidebar-item" aria-label="1、理解时间序列"><!--[--><!--]--> 1、理解时间序列 <!--[--><!--]--></a><!----></li><li><a aria-current="page" href="/Prometheus/#_2、指标-metric-的4种类型" class="router-link-active router-link-exact-active sidebar-item" aria-label="2、指标(Metric)的4种类型"><!--[--><!--]--> 2、指标(Metric)的4种类型 <!--[--><!--]--></a><!----></li><li><a aria-current="page" href="/Prometheus/#_3、job-任务-和instances-实例" class="router-link-active router-link-exact-active sidebar-item" aria-label="3、job（任务）和instances（实例）"><!--[--><!--]--> 3、job（任务）和instances（实例） <!--[--><!--]--></a><!----></li><!--]--></ul></li><li><a aria-current="page" href="/Prometheus/#七、exporter" class="router-link-active router-link-exact-active sidebar-item" aria-label="七、Exporter"><!--[--><!--]--> 七、Exporter <!--[--><!--]--></a><ul style="" class="sidebar-item-children"><!--[--><li><a aria-current="page" href="/Prometheus/#_1、概述-1" class="router-link-active router-link-exact-active sidebar-item" aria-label="1、概述"><!--[--><!--]--> 1、概述 <!--[--><!--]--></a><!----></li><li><a aria-current="page" href="/Prometheus/#_2、exporter的来源" class="router-link-active router-link-exact-active sidebar-item" aria-label="2、Exporter的来源"><!--[--><!--]--> 2、Exporter的来源 <!--[--><!--]--></a><!----></li><li><a aria-current="page" href="/Prometheus/#_3、exporter-类型" class="router-link-active router-link-exact-active sidebar-item" aria-label="3、Exporter 类型"><!--[--><!--]--> 3、Exporter 类型 <!--[--><!--]--></a><!----></li><li><a aria-current="page" href="/Prometheus/#_4、exporter规范" class="router-link-active router-link-exact-active sidebar-item" aria-label="4、Exporter规范"><!--[--><!--]--> 4、Exporter规范 <!--[--><!--]--></a><!----></li><!--]--></ul></li><!--]--></ul></li><!--]--></ul><!--[--><!--]--></aside><!--]--><!--[--><main class="page"><!--[--><!--]--><div class="theme-default-content"><!--[--><!--]--><div><h1 id="prometheus" tabindex="-1"><a class="header-anchor" href="#prometheus" aria-hidden="true">#</a> Prometheus</h1><h2 id="一、prometheus监控介绍" tabindex="-1"><a class="header-anchor" href="#一、prometheus监控介绍" aria-hidden="true">#</a> 一、Prometheus监控介绍</h2><h3 id="_1、概述" tabindex="-1"><a class="header-anchor" href="#_1、概述" aria-hidden="true">#</a> 1、概述</h3><p><strong>什么是普罗米修斯？</strong></p><p>Prometheus 是一个开源系统监控和警报工具包，Prometheus 受启发于 Google 的Brogmon 监控系统（相似的 Kubernetes 是从 Google的 Brog 系统演变而来），从 2012 年开始由前 Google 工程师在 Soundcloud 以开源软件的形式进行研发，并且于 2015 年早期对外发布早期版本。</p><p>2016 年 5 月继 Kubernetes 之后成为第二个正式加入 CNCF 基金会的项目，同年 6 月正式发布 1.0 版本。2017 年底发布了基于全新存储层的 2.0 版本，能更好地与容器平台、云平台配合。</p><h3 id="_2、特点" tabindex="-1"><a class="header-anchor" href="#_2、特点" aria-hidden="true">#</a> 2、特点</h3><p>普罗米修斯的主要特点是：</p><ul><li>支持多维数据模型由指标名称和键值对标识的时间序列数据</li><li>内置时间序列库TSDB（Time Serices Database）</li><li>支持PromQL（Promethues Query Language），对数据的查询和分析、图形展示和监控告警。</li><li>不依赖分布式存储；单个服务器节点是自治的</li><li>支持HTTP的拉取(pull)方式收集时间序列数据</li><li>通过中间网关Pushgateway推送时间序列</li><li>通过服务发现或静态配置2种方式发现目标</li><li>支持多种可视化和仪表盘，如：grafana</li></ul><h3 id="_3、核心组件" tabindex="-1"><a class="header-anchor" href="#_3、核心组件" aria-hidden="true">#</a> 3、核心组件</h3><ul><li>Prometheus Server，主要用于抓取数据和存储时序数据，另外还提供查询和 Alert Rule 配置管理。</li><li>client libraries，用于检测应用程序代码的客户端库。</li><li>push gateway，用于批量，短期的监控数据的汇总节点，主要用于业务数据汇报等。</li><li>exporters 收集监控样本数据,并以标准格式向 Prometheus 提供。例如：收集服务器系统数据的 node_exporter，收集 MySQL 监控样本数据的是 MySQL exporter 等等。</li><li>用于告警通知管理的 alertmanager。</li></ul><h3 id="_4、基础架构" tabindex="-1"><a class="header-anchor" href="#_4、基础架构" aria-hidden="true">#</a> 4、基础架构</h3><p><img src="/assets/1-afaf5ac6.png" alt="prometheus architecture"></p><p>从这个架构图,也可以看出Prometheus的主要模块包含，Server，Exporters，Pushgateway，PromQL，Alertmanager，WebUl等。</p><p>它大致使用逻辑是这样：</p><p>1.Prometheus server定期从静态配置的targets或者服务发现的targets 拉取数据（Targets是Prometheus采集Agent需要抓取的采集目标）</p><p>2.当新拉取的数据关于配置内存缓存区的时候，Prometheus 会将数据持久化到磁盘（如果使用remote storage将持久化到云端）。</p><p>3.Prometheus可以配置rules，然后定时查询数据，当条件触发的时候，会将alerts 推送到配置的Alertmanager。</p><p>4.Alertmanager收到警告的时候，可以根据配置（163，钉钉等），聚合，去重，降噪，最后发送警告。</p><p>5.可以使用 API，Prometheus Console 或者Grafana 查询和聚合数据。</p><h3 id="_5、prometheus与zabbix的对比" tabindex="-1"><a class="header-anchor" href="#_5、prometheus与zabbix的对比" aria-hidden="true">#</a> 5、Prometheus与Zabbix的对比</h3><table><thead><tr><th>Prometheus对比Zabbix:</th><th></th></tr></thead><tbody><tr><td>Zabbix</td><td>Prometheus</td></tr><tr><td>后端用C开发，界面用PHP开发，定制化难度很高。</td><td>后端用golang开发，前端是Grafana，JSON编辑即可解决定制化难度较低</td></tr><tr><td>6.0支持单个Zabbix实例监控超过10万个业务服务</td><td>支持更大的集群规模，速度也更快</td></tr><tr><td>更适合监控物理机环境（物理主机，交换机，网络等监控）</td><td>更适合云环境的监控，对OpenStack，Kubernetes有更好的集成</td></tr><tr><td>监控数据存储在关系型数据库内，如MySQL，很难从现有数据中扩展维度</td><td>监控数据存储在基于时间序列的数据库内，便于对已有数据进行新的聚合。十级监控数据，Prometheus数据查询速率比Zabbix更快</td></tr><tr><td>安装简单，zabbix-server一个软件包中包括了所有的服务端功能</td><td>安装相对复杂，监控、告警和界面都分属于不同的组件</td></tr><tr><td>图形化界面比较成熟，界面上基本上能完成全部的配置操作</td><td>界面相对较弱，很多配置需要修改配置文件</td></tr><tr><td>发展时间更长，对于很多监控场景，都有现成的解决方案</td><td>2015年后开始快速发展，发展时间短，但现在也非常的成熟</td></tr></tbody></table><h3 id="_6、总结" tabindex="-1"><a class="header-anchor" href="#_6、总结" aria-hidden="true">#</a> 6、总结</h3><p>监控系统没有绝对的谁好谁不好，最重要的是适合自己的公司团队，能够合理利用最小的成本解决问题。prometheus，zabbix都只是工具，监控思想才是最重要的。</p><p>实在不知道怎么选？参考如下：</p><p>物理机、硬件设备的监控推荐使用Zabbix</p><p>而docker容器，Kubernetes监控推荐用Prometheus</p><p>云服务器厂商自带有监控系统，有的监控不全面，也可以搭配zabbix和Prometheus来一起使用。</p><h2 id="二、二进制安装prometheus-grafana" tabindex="-1"><a class="header-anchor" href="#二、二进制安装prometheus-grafana" aria-hidden="true">#</a> 二、二进制安装Prometheus+Grafana</h2><h3 id="_1、环境" tabindex="-1"><a class="header-anchor" href="#_1、环境" aria-hidden="true">#</a> 1、环境</h3><table><thead><tr><th>主机名</th><th>IP地址</th><th>配置</th><th>系统</th><th>说明</th></tr></thead><tbody><tr><td>localhost</td><td>10.0.0.112</td><td>2核4G</td><td>Centos 7.9</td><td>Prometheus版本：2.37.6 LTS，grafana版本：9.4.3，alertmanager版本：0.25，node-exporter版本：1.5.0</td></tr></tbody></table><p><strong>克隆虚拟机</strong></p><p>通过链接克隆一台新的虚拟机，并把ip更为10.0.0.112</p><h3 id="_2、-从官网手动安装" tabindex="-1"><a class="header-anchor" href="#_2、-从官网手动安装" aria-hidden="true">#</a> 2、 从官网手动安装</h3><ul><li>Prometheus 采集、存储数据</li><li>Grafana 用于图表展示</li><li>alertmanager 用于接收 Prometheus 发送的告警信息</li><li>node-exporter 用于收集操作系统和硬件信息的metrics</li></ul><h4 id="_2-1-安装prometheus" tabindex="-1"><a class="header-anchor" href="#_2-1-安装prometheus" aria-hidden="true">#</a> 2.1 安装Prometheus</h4><p><a href="https://prometheus.io/download/" target="_blank" rel="noopener noreferrer">官网下载地址<span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">open in new window</span></span></a>，获取最新下载URL</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code><span class="token comment"># 切换到root用户</span>
+<span class="token function">sudo</span> <span class="token parameter variable">-i</span>
+
+<span class="token comment"># 下载Prometheus二进制压缩包</span>
+<span class="token function">wget</span> <span class="token string">&quot;https://github.com/prometheus/prometheus/releases/download/v2.37.7/prometheus-2.37.7.linux-amd64.tar.gz&quot;</span>
+
+<span class="token comment"># 解压</span>
+<span class="token function">tar</span> <span class="token parameter variable">-zxvf</span> prometheus-2.37.7.linux-amd64.tar.gz
+
+<span class="token comment"># 查看解压后的文件名</span>
+<span class="token function">ls</span> <span class="token parameter variable">-l</span>
+
+<span class="token comment"># 创建目录</span>
+<span class="token function">mkdir</span> /opt/prometheus <span class="token parameter variable">-p</span>
+
+<span class="token comment"># 移动解压后的文件名到/opt目录下，并改名prometheus</span>
+<span class="token function">mv</span> prometheus-2.37.7.linux-amd64 /opt/prometheus/prometheus 
+</code></pre></div><p>创建一个专门的 <code>prometheus</code> 用户：</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code><span class="token function">useradd</span> <span class="token parameter variable">-M</span> <span class="token parameter variable">-s</span> /usr/sbin/nologin prometheus
+</code></pre></div><p>更改 <code>prometheus</code> 用户的文件夹权限：</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code><span class="token function">chown</span> prometheus:prometheus <span class="token parameter variable">-R</span> /opt/prometheus
+</code></pre></div><p>创建 <code>systemd</code> 服务</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code><span class="token function">cat</span> <span class="token operator">&gt;</span> /etc/systemd/system/prometheus.service <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;EOF&quot;
+[Unit]
+Description=Prometheus Server
+Documentation=https://prometheus.io/docs/introduction/overview/
+After=network-online.target
+ 
+[Service]
+Type=simple
+User=prometheus
+Group=prometheus
+Restart=on-failure
+ExecStart=/opt/prometheus/prometheus/prometheus \
+--config.file=/opt/prometheus/prometheus/prometheus.yml \
+--storage.tsdb.path=/opt/prometheus/prometheus/data \
+--storage.tsdb.retention=60d \
+--web.enable-lifecycle
+
+[Install]
+WantedBy=multi-user.target
+EOF</span>
+</code></pre></div><p>配置参数解释：</p><blockquote><p>通过 <code>/opt/prometheus/prometheus -h</code> 查看帮助详情</p></blockquote><div class="language-bash" data-ext="sh"><pre class="language-bash"><code><span class="token parameter variable">--config.file</span><span class="token operator">=</span>/opt/prometheus/prometheus/prometheus.yml
+<span class="token comment">#主配置文件</span>
+<span class="token parameter variable">--storage.tsdb.path</span><span class="token operator">=</span>/opt/prometheus/prometheus/data
+<span class="token comment">#数据库存储目录</span>
+<span class="token parameter variable">--web.console.libraries</span><span class="token operator">=</span>/opt/prometheus/prometheus/console_libraries
+<span class="token comment">#指定控制台库目录路径</span>
+<span class="token parameter variable">--web.console.templates</span><span class="token operator">=</span>/opt/prometheus/prometheus/consoles
+<span class="token comment">#指定控制台模版目录路径</span>
+<span class="token parameter variable">--storage.tsdb.retention</span><span class="token operator">=</span>60d
+<span class="token comment">#指明数据保留天数，默认15天</span>
+--web.enable-lifecycle
+<span class="token comment">#热加载</span>
+</code></pre></div><p>启动 Prometheus</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code>systemctl daemon-reload
+systemctl start prometheus.service
+</code></pre></div><p>加入到开机自启动</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code>systemctl <span class="token builtin class-name">enable</span> prometheus.service
+</code></pre></div><p>检查</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code>systemctl status prometheus.service
+</code></pre></div><p>查看 Prometheus 的日志以进行故障排除：</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code>journalctl <span class="token parameter variable">-u</span> prometheus.service <span class="token parameter variable">-f</span>
+</code></pre></div><p>访问地址</p><table><thead><tr><th>应用</th><th>访问地址</th><th>备注</th></tr></thead><tbody><tr><td>prometheus</td><td>http://10.0.0.112:9090</td><td>无用户和密码</td></tr><tr><td>监控指标</td><td>http://10.0.0.112:9090/metrics</td><td></td></tr></tbody></table><h4 id="_2-2-安装alertmanager" tabindex="-1"><a class="header-anchor" href="#_2-2-安装alertmanager" aria-hidden="true">#</a> 2.2 安装alertmanager</h4><p>下载alertmanager</p><p><a href="https://prometheus.io/download/" target="_blank" rel="noopener noreferrer">官网下载地址<span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">open in new window</span></span></a>，获取最新下载URL</p><ul><li>注：在root用户下执行</li></ul><div class="language-bash" data-ext="sh"><pre class="language-bash"><code><span class="token comment"># 下载alertmanager二进制压缩包</span>
+<span class="token function">wget</span> <span class="token string">&quot;http://github.com/prometheus/alertmanager/releases/download/v0.25.0/alertmanager-0.25.0.linux-amd64.tar.gz&quot;</span>
+
+<span class="token comment"># 解压</span>
+<span class="token function">tar</span> <span class="token parameter variable">-zxvf</span> alertmanager-0.25.0.linux-amd64.tar.gz
+
+<span class="token comment"># 查看解压后的文件名</span>
+<span class="token function">ls</span> <span class="token parameter variable">-l</span>
+
+<span class="token comment"># 移动解压后的文件名到/opt目录下，并改名alertmanager</span>
+<span class="token function">mv</span> alertmanager-0.25.0.linux-amd64 /opt/prometheus/alertmanager
+</code></pre></div><p>更改 <code>alertmanager</code> 文件夹权限：</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code><span class="token function">chown</span> prometheus:prometheus <span class="token parameter variable">-R</span> /opt/prometheus/alertmanager
+</code></pre></div><p>创建 systemd 服务</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code><span class="token function">cat</span> <span class="token operator">&gt;</span>/etc/systemd/system/alertmanager.service <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;EOF&quot;
+[Unit]
+Description=Alert Manager
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=prometheus
+Group=prometheus
+ExecStart=/opt/prometheus/alertmanager/alertmanager \
+  --config.file=/opt/prometheus/alertmanager/alertmanager.yml \
+  --storage.path=/opt/prometheus/alertmanager/data
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+EOF</span>
+</code></pre></div><p>启动 alertmanager</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code>systemctl daemon-reload
+systemctl start alertmanager.service
+</code></pre></div><p>加入到开机自启动</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code>systemctl <span class="token builtin class-name">enable</span> alertmanager.service
+</code></pre></div><p>检查</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code>systemctl status alertmanager.service
+journalctl <span class="token parameter variable">-u</span> alertmanager.service <span class="token parameter variable">-f</span>
+</code></pre></div><h4 id="_2-3-修改prometheus配置" tabindex="-1"><a class="header-anchor" href="#_2-3-修改prometheus配置" aria-hidden="true">#</a> 2.3 修改Prometheus配置</h4><p>加入alertmanager</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code><span class="token function">vim</span> /opt/prometheus/prometheus/prometheus.yml
+<span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          <span class="token comment"># 根据实际填写alertmanager的地址</span>
+          - localhost:9093
+<span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>
+rule_files:
+  <span class="token comment"># 根据实际名修改文件名</span>
+  - <span class="token string">&quot;alert.yml&quot;</span>
+<span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>
+</code></pre></div><p>增加触发器配置文件</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code><span class="token function">cat</span> <span class="token operator">&gt;</span> /opt/prometheus/prometheus/alert.yml <span class="token operator">&lt;&lt;</span><span class="token string">&quot;EOF&quot;
+groups:
+- name: Prometheus alert
+  rules:
+  # 对任何实例超过30s无法联系的情况发出警报
+  - alert: 服务告警
+    expr: up == 0
+    for: 30s
+    labels:
+      severity: critical
+    annotations:
+      instance: &quot;{{ $labels.instance }}&quot;
+      description: &quot;{{ $labels.job }} 服务已关闭&quot;
+EOF</span>
+</code></pre></div><p>检查配置</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code><span class="token builtin class-name">cd</span> /opt/prometheus/prometheus/
+./promtool check config prometheus.yml
+</code></pre></div><p>重启prometheus或重新加载配置文件（二选一）</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code><span class="token comment">#重启</span>
+systemctl restart prometheus
+<span class="token comment">#或：</span>
+<span class="token comment">#重载，需要--web.enable-lifecycle配置</span>
+<span class="token function">curl</span> <span class="token parameter variable">-X</span> POST http://localhost:9090/-/reload
+</code></pre></div><p>访问地址</p><table><thead><tr><th>应用</th><th>访问地址</th><th>备注</th></tr></thead><tbody><tr><td>alertmanager</td><td>http://10.0.0.112:9093</td><td>无用户和密码</td></tr></tbody></table><p>检查</p><p>http://10.0.0.112:9093/#/status</p><h4 id="_2-4-安装grafana" tabindex="-1"><a class="header-anchor" href="#_2-4-安装grafana" aria-hidden="true">#</a> 2.4 安装Grafana</h4><p>官网下载地址：https://grafana.com/grafana/download</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code><span class="token function">wget</span> https://dl.grafana.com/enterprise/release/grafana-enterprise-9.5.1.linux-amd64.tar.gz
+<span class="token function">tar</span> <span class="token parameter variable">-zxvf</span> grafana-enterprise-9.5.1.linux-amd64.tar.gz
+<span class="token function">mv</span> grafana-9.5.1 /opt/prometheus/grafana
+</code></pre></div><p>更改 <code>grafana</code> 文件夹权限：</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code><span class="token function">chown</span> prometheus:prometheus <span class="token parameter variable">-R</span> /opt/prometheus/
+</code></pre></div><p>创建 systemd 访问</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code><span class="token function">cat</span> <span class="token operator">&gt;</span>/etc/systemd/system/grafana-server.service<span class="token operator">&lt;&lt;</span><span class="token string">&quot;EOF&quot;
+[Unit]
+Description=Grafana server
+Documentation=http://docs.grafana.org
+
+[Service]
+Type=simple
+User=prometheus
+Group=prometheus
+Restart=on-failure
+ExecStart=/opt/prometheus/grafana/bin/grafana-server \
+--config=/opt/prometheus/grafana/conf/defaults.ini \
+--homepath=/opt/prometheus/grafana
+
+[Install]
+WantedBy=multi-user.target
+EOF</span>
+</code></pre></div><p>启动 grafana</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code>systemctl daemon-reload
+systemctl start grafana-server.service
+</code></pre></div><p>加入到开机启动</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code>systemctl <span class="token builtin class-name">enable</span> grafana-server.service
+</code></pre></div><p>检查</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code>journalctl <span class="token parameter variable">-u</span> grafana-server.service <span class="token parameter variable">-f</span>
+</code></pre></div><p>web访问地址</p><table><thead><tr><th>应用</th><th>访问地址</th><th>备注</th></tr></thead><tbody><tr><td>grafana</td><td>http://10.0.0.112:3000</td><td>默认：admin/admin</td></tr></tbody></table><h4 id="_2-5-安装node-exporter" tabindex="-1"><a class="header-anchor" href="#_2-5-安装node-exporter" aria-hidden="true">#</a> 2.5 安装node_exporter</h4><p>官网下载地址：https://prometheus.io/download/</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code><span class="token function">wget</span> https://github.com/prometheus/node_exporter/releases/download/v1.5.0/node_exporter-1.5.0.linux-amd64.tar.gz
+
+<span class="token function">tar</span> <span class="token parameter variable">-zxvf</span> node_exporter-1.5.0.linux-amd64.tar.gz
+
+<span class="token function">ls</span> <span class="token parameter variable">-l</span>
+
+<span class="token function">mv</span> node_exporter-1.5.0.linux-amd64 /opt/prometheus/node_exporter
+</code></pre></div><p>更改 <code>node_exporter</code> 文件夹权限：</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code><span class="token function">chown</span> prometheus:prometheus <span class="token parameter variable">-R</span> /opt/prometheus/node_exporter
+</code></pre></div><p>创建 systemd 服务</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code><span class="token function">cat</span> <span class="token operator">&gt;</span> /etc/systemd/system/node_exporter.service <span class="token operator">&lt;&lt;</span><span class="token string">&quot;EOF&quot;
+[Unit]
+Description=node_exporter
+Documentation=https://prometheus.io/
+After=network.target
+
+[Service]
+User=prometheus
+Group=prometheus
+ExecStart=/opt/prometheus/node_exporter/node_exporter
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+EOF</span>
+</code></pre></div><p>启动 node_exporter</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code>systemctl daemon-reload
+systemctl start node_exporter.service
+</code></pre></div><p>加入到开机自启动</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code>systemctl <span class="token builtin class-name">enable</span> node_exporter.service
+</code></pre></div><p>检查</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code>systemctl status node_exporter.service
+</code></pre></div><p>检查日志</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code>journalctl <span class="token parameter variable">-u</span> node_exporter.service <span class="token parameter variable">-f</span>
+</code></pre></div><p>web访问地址</p><table><thead><tr><th>应用</th><th>访问地址</th><th>备注</th></tr></thead><tbody><tr><td>node_exporter</td><td>http://10.0.0.112:9100/metrics</td><td>无用户和密码</td></tr></tbody></table><h4 id="_2-6-修改prometheus配置" tabindex="-1"><a class="header-anchor" href="#_2-6-修改prometheus配置" aria-hidden="true">#</a> 2.6 修改prometheus配置</h4><p>prometheus服务器操作</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code><span class="token function">cat</span> <span class="token operator">&gt;&gt;</span> /opt/prometheus/prometheus/prometheus.yml <span class="token operator">&lt;&lt;</span><span class="token string">&quot;EOF&quot;
+# 再scrape_configs这行下面添加如下配置：
+  # node-exporter配置
+  - job_name: &#39;node-exporter&#39;
+    scrape_interval: 15s
+    static_configs:
+    - targets: [&#39;localhost:9100&#39;]
+      labels:
+        instance: Prometheus服务器
+EOF</span>
+</code></pre></div><p>重载prometheus</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code><span class="token function">curl</span> <span class="token parameter variable">-X</span> POST http://localhost:9090/-/reload
+</code></pre></div><p>Prometheus web上检查</p><p>http://10.0.0.112:9090/targets?search=</p><h2 id="三、使用grafana9-5-1展示prometheus的图形" tabindex="-1"><a class="header-anchor" href="#三、使用grafana9-5-1展示prometheus的图形" aria-hidden="true">#</a> 三、使用Grafana9.5.1展示Prometheus的图形</h2><h3 id="_1、登录grafana" tabindex="-1"><a class="header-anchor" href="#_1、登录grafana" aria-hidden="true">#</a> 1、登录Grafana</h3><p>web访问地址</p><table><thead><tr><th>应用</th><th>访问地址</th><th>备注</th></tr></thead><tbody><tr><td>Grafana</td><td>http://10.0.0.112:3000</td><td>默认：admin/admin</td></tr></tbody></table><h3 id="_2、创建-prometheus-数据源" tabindex="-1"><a class="header-anchor" href="#_2、创建-prometheus-数据源" aria-hidden="true">#</a> 2、创建 Prometheus 数据源</h3><p>登录Grafana，Home &gt; Administration &gt; Data sources，点击 <code>Add new data source</code> 选择 <code>Prometheus</code>，URL：<code>http://localhost:9090</code>，点击<code>Save &amp; test</code>。</p><blockquote><p>跳转地址：http://10.0.0.112:3000/datasources/new</p></blockquote><h3 id="_3、创建仪表盘" tabindex="-1"><a class="header-anchor" href="#_3、创建仪表盘" aria-hidden="true">#</a> 3、创建仪表盘</h3><h4 id="_3-1-从-grafana-com-选择仪表板" tabindex="-1"><a class="header-anchor" href="#_3-1-从-grafana-com-选择仪表板" aria-hidden="true">#</a> 3.1 从 Grafana.com 选择仪表板</h4><p>跳转 https://grafana.com/grafana/dashboards/ 找到 <code>Node Exporter Full</code> 点击进去，点击 <code>Dashboard ID copied!</code> ，获取到 ID：<code>1860</code> 。</p><blockquote><p>跳转地址：https://grafana.com/grafana/dashboards/1860-node-exporter-full/</p></blockquote><h4 id="_3-2-通过id导入仪表板" tabindex="-1"><a class="header-anchor" href="#_3-2-通过id导入仪表板" aria-hidden="true">#</a> 3.2 通过ID导入仪表板</h4><p>登录Grafana，Home &gt; Dashboards，点击 <code>New</code> 选择 <code>Import</code>，Import via grafana.com： <code>1860</code>，点击 <code>Load</code>，Name：<code>服务器监控</code>，Prometheus：<code>Prometheus</code>，点击 <code>Import</code>。</p><blockquote><p>跳转地址：http://10.0.0.112:3000/dashboard/import</p></blockquote><h2 id="四、docker搭建prometheus监控系统" tabindex="-1"><a class="header-anchor" href="#四、docker搭建prometheus监控系统" aria-hidden="true">#</a> 四、Docker搭建Prometheus监控系统</h2><h3 id="_1、环境-1" tabindex="-1"><a class="header-anchor" href="#_1、环境-1" aria-hidden="true">#</a> 1、环境</h3><table><thead><tr><th>主机名</th><th>IP地址</th><th>配置</th><th>系统</th><th>说明</th></tr></thead><tbody><tr><td>localhost</td><td>10.0.0.112</td><td>2核4G</td><td>Centos 7.9</td><td>docker版本：23.0.1，docker-compose版本：1.29.2</td></tr></tbody></table><h4 id="_1-1-安装docker" tabindex="-1"><a class="header-anchor" href="#_1-1-安装docker" aria-hidden="true">#</a> 1.1 安装Docker</h4><p>镜像加速</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code><span class="token function">mkdir</span> <span class="token parameter variable">-p</span> /etc/docker
+<span class="token function">tee</span> /etc/docker/daemon.json <span class="token operator">&lt;&lt;</span><span class="token string">&#39;EOF&#39;
+{
+  &quot;registry-mirrors&quot;: [&quot;http://hub-mirror.c.163.com&quot;]
+}
+EOF</span>
+</code></pre></div><p>安装docker</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code><span class="token builtin class-name">export</span> <span class="token assign-left variable">DOWNLOAD_URL</span><span class="token operator">=</span><span class="token string">&quot;http://mirrors.163.com/docker-ce&quot;</span>
+<span class="token function">curl</span> <span class="token parameter variable">-fsSL</span> https://get.docker.com/ <span class="token operator">|</span> <span class="token function">sh</span>
+</code></pre></div><p>检查</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code><span class="token function">docker</span> <span class="token parameter variable">-v</span>
+<span class="token comment"># 或：</span>
+systemctl status <span class="token function">docker</span>
+</code></pre></div><h4 id="_1-2-安装docker-compose" tabindex="-1"><a class="header-anchor" href="#_1-2-安装docker-compose" aria-hidden="true">#</a> 1.2 安装Docker-compose</h4><p>安装命令</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code><span class="token comment"># 安装后报错</span>
+<span class="token function">curl</span> <span class="token parameter variable">-L</span> https://get.daocloud.io/docker/compose/releases/download/1.29.2/docker-compose-<span class="token variable"><span class="token variable">`</span><span class="token function">uname</span> <span class="token parameter variable">-s</span><span class="token variable">`</span></span>-<span class="token variable"><span class="token variable">`</span><span class="token function">uname</span> <span class="token parameter variable">-m</span><span class="token variable">`</span></span> <span class="token operator">&gt;</span> /usr/local/bin/docker-compose
+<span class="token function">chmod</span> +x /usr/local/bin/docker-compose
+<span class="token comment"># 官网</span>
+<span class="token function">curl</span> <span class="token parameter variable">-L</span> https://github.com/docker/compose/releases/tag/1.29.2 docker-compose-<span class="token variable"><span class="token variable">`</span><span class="token function">uname</span> <span class="token parameter variable">-s</span><span class="token variable">`</span></span>-<span class="token variable"><span class="token variable">`</span><span class="token function">uname</span> <span class="token parameter variable">-m</span><span class="token variable">`</span></span> <span class="token operator">&gt;</span> /usr/local/bin/docker-compose
+<span class="token function">chmod</span> +x /usr/local/bin/docker-compose
+</code></pre></div><p>检查</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code><span class="token function">docker-compose</span> <span class="token parameter variable">-v</span>
+</code></pre></div><h3 id="_2、docker-compose安装prometheus" tabindex="-1"><a class="header-anchor" href="#_2、docker-compose安装prometheus" aria-hidden="true">#</a> 2、Docker-compose安装Prometheus</h3><h4 id="_2-1-手动创建docker-compose和配置文件-二选一" tabindex="-1"><a class="header-anchor" href="#_2-1-手动创建docker-compose和配置文件-二选一" aria-hidden="true">#</a> 2.1 手动创建docker-compose和配置文件（二选一）</h4><h5 id="_2-1-1-创建prometheus监控的文件夹" tabindex="-1"><a class="header-anchor" href="#_2-1-1-创建prometheus监控的文件夹" aria-hidden="true">#</a> 2.1.1 创建prometheus监控的文件夹</h5><div class="language-bash" data-ext="sh"><pre class="language-bash"><code><span class="token function">mkdir</span> /data/docker-prometheus <span class="token parameter variable">-p</span>
+<span class="token function">mkdir</span> /data/docker-prometheus/<span class="token punctuation">{</span>grafana,prometheus,alertmanager<span class="token punctuation">}</span> <span class="token parameter variable">-p</span>
+<span class="token builtin class-name">cd</span> /data/docker-prometheus/
+</code></pre></div><h5 id="_2-1-2-创建alertmanager的配置文件" tabindex="-1"><a class="header-anchor" href="#_2-1-2-创建alertmanager的配置文件" aria-hidden="true">#</a> 2.1.2 创建alertmanager的配置文件</h5><div class="language-bash" data-ext="sh"><pre class="language-bash"><code><span class="token function">cat</span> <span class="token operator">&gt;</span> alertmanager/config.yml <span class="token operator">&lt;&lt;</span><span class="token string">&quot;EOF&quot;
+global:
+  #163服务器
+  smtp_smarthost: &#39;smtp.qq.com:465&#39;
+  #发邮件的邮箱
+  smtp_from: &#39;820205163@qq.com&#39;
+  #发邮件的邮箱用户名，也就是你的邮箱　　　　　
+  smtp_auth_username: &#39;820205163@qq.com&#39;
+  #发邮件的邮箱密码
+  smtp_auth_password: &#39;okhjuhfvgqujbbie&#39;
+  #进行tls验证
+  smtp_require_tls: false
+
+route:
+  group_by: [&#39;alertname&#39;]
+  # 当收到告警的时候，等待group_wait配置的时间，看是否还有告警，如果有就一起发出去
+  group_wait: 10s
+  #  如果上次告警信息发送成功，此时又来了一个新的告警数据，则需要等待group_interval配置的时间才可以发送出去
+  group_interval: 10s
+  # 如果上次告警信息发送成功，且问题没有解决，则等待 repeat_interval配置的时间再次发送告警数据
+  repeat_interval: 10m
+  # 全局报警组，这个参数是必选的
+  receiver: email
+
+receivers:
+- name: &#39;email&#39;
+  #收邮件的邮箱
+  email_configs:
+  - to: &#39;1209599006@qq.com&#39;
+inhibit_rules:
+ - source_match:
+     severity: &#39;critical&#39;
+   target_match:
+     severity: &#39;warning&#39;
+   equal: [&#39;alertname&#39;, &#39;dev&#39;, &#39;instance&#39;]
+EOF</span>
+</code></pre></div><h5 id="_2-1-3-新建grafana的配置文件" tabindex="-1"><a class="header-anchor" href="#_2-1-3-新建grafana的配置文件" aria-hidden="true">#</a> 2.1.3 新建Grafana的配置文件</h5><p><code>GF_SECURITY_ADMIN_PASSWORD=</code> 为Grafana超级管理员admin的密码，根据实际修改</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code><span class="token function">cat</span> <span class="token operator">&gt;</span> grafana/config.monitoring <span class="token operator">&lt;&lt;</span><span class="token string">&#39;EOF&#39;
+GF_SECURITY_ADMIN_PASSWORD=password
+GF_USERS_ALLOW_SIGN_UP=false
+EOF</span>
+</code></pre></div><h5 id="_2-1-4-新建prometheus的配置文件" tabindex="-1"><a class="header-anchor" href="#_2-1-4-新建prometheus的配置文件" aria-hidden="true">#</a> 2.1.4 新建Prometheus的配置文件</h5><div class="language-bash" data-ext="sh"><pre class="language-bash"><code><span class="token function">cat</span> <span class="token operator">&gt;</span> prometheus/prometheus.yml <span class="token operator">&lt;&lt;</span><span class="token string">&#39;EOF&#39;
+# 全局配置
+global:
+  scrape_interval:     15s # 将搜刮间隔设置为每15秒一次。默认是每1分钟一次。
+  evaluation_interval: 15s # 每15秒评估一次规则。默认是每1分钟一次。
+
+# Alertmanager 配置
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets: [&#39;alertmanager:9093&#39;]
+
+# 报警(触发器)配置
+rule_files:
+  - &quot;alert.yml&quot;
+
+# 搜刮配置
+scrape_configs:
+  - job_name: &#39;prometheus&#39;
+    # 覆盖全局默认值，每15秒从该作业中刮取一次目标
+    scrape_interval: 15s
+    static_configs:
+    - targets: [&#39;localhost:9090&#39;]
+  - job_name: &#39;alertmanager&#39;
+    scrape_interval: 15s
+    static_configs:
+    - targets: [&#39;alertmanager:9093&#39;]
+  - job_name: &#39;cadvisor&#39;
+    scrape_interval: 15s
+    static_configs:
+    - targets: [&#39;cadvisor:8080&#39;]
+      labels:
+        instance: Prometheus服务器 
+
+  - job_name: &#39;node-exporter&#39;
+    scrape_interval: 15s
+    static_configs:
+    - targets: [&#39;node_exporter:9100&#39;]
+      labels:
+        instance: Prometheus服务器 
+EOF</span>
+</code></pre></div><h5 id="_2-1-5-创建alert报警文件" tabindex="-1"><a class="header-anchor" href="#_2-1-5-创建alert报警文件" aria-hidden="true">#</a> 2.1.5 创建alert报警文件</h5><div class="language-bash" data-ext="sh"><pre class="language-bash"><code><span class="token function">cat</span> <span class="token operator">&gt;</span> prometheus/alert.yaml <span class="token operator">&lt;&lt;</span><span class="token string">&#39;EOF&#39;
+groups:
+- name: Prometheus alert
+  rules:
+  # 对任何实例超过30秒无法联系的情况发出警报
+  - alert: 服务告警
+    expr: up == 0
+    for: 30s
+    labels:
+      severity: critical
+    annotations:
+      summary: &quot;服务异常,实例:{{ $labels.instance }}&quot;
+      description: &quot;{{ $labels.job }} 服务已关闭&quot;
+EOF</span>
+</code></pre></div><h5 id="_2-1-6-新建docker-compose-yaml文件" tabindex="-1"><a class="header-anchor" href="#_2-1-6-新建docker-compose-yaml文件" aria-hidden="true">#</a> 2.1.6 新建docker-compose.yaml文件</h5><p>prometheus docker hub最新版本查看地址：hub.docker.com/r/prom/prometheus/tags</p><p>alertmanager docker hub最新版本查看地址：hub.docker.com/r/prom/alertmanager/tags</p><p>node_exporter docker hub最新版本查看地址：hub.docker.com/r/prom/node-exporter/tags</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code><span class="token comment">#进入到prometheus目录</span>
+<span class="token builtin class-name">cd</span> /data/docker-prometheus
+
+<span class="token comment">#通过cat新建docker-compose.yaml文件</span>
+<span class="token function">cat</span> <span class="token operator">&gt;</span> docker-compose.yaml <span class="token operator">&lt;&lt;</span><span class="token string">&#39;EOF&#39;
+version: &#39;3.3&#39;
+
+volumes:
+  prometheus_data: {}
+  grafana_data: {}
+
+networks:
+  monitoring:
+    driver: bridge
+
+services:
+  prometheus:
+    image: prom/prometheus:v2.37.6
+    container_name: prometheus
+    restart: always
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./prometheus/:/etc/prometheus/
+      - prometheus_data:/prometheus
+    command:
+      - &#39;--config.file=/etc/prometheus/prometheus.yml&#39;
+      - &#39;--storage.tsdb.path=/prometheus&#39;
+      - &#39;--web.console.libraries=/usr/share/prometheus/console_libraries&#39;
+      - &#39;--web.console.templates=/usr/share/prometheus/consoles&#39;
+      #热加载配置
+      - &#39;--web.enable-lifecycle&#39;
+      #api配置
+      #- &#39;--web.enable-admin-api&#39;
+      #历史数据最大保留时间，默认15天
+      - &#39;--storage.tsdb.retention.time=30d&#39;  
+    networks:
+      - monitoring
+    links:
+      - alertmanager
+      - cadvisor
+      - node_exporter
+    expose:
+      - &#39;9090&#39;
+    ports:
+      - 9090:9090
+    depends_on:
+      - cadvisor
+
+  alertmanager:
+    image: prom/alertmanager:v0.25.0
+    container_name: alertmanager
+    restart: always
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./alertmanager/:/etc/alertmanager/
+    command:
+      - &#39;--config.file=/etc/alertmanager/config.yml&#39;
+      - &#39;--storage.path=/alertmanager&#39;
+    networks:
+      - monitoring
+    expose:
+      - &#39;9093&#39;
+    ports:
+      - 9093:9093
+
+  cadvisor:
+    image: google/cadvisor:latest
+    container_name: cadvisor
+    restart: always
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    networks:
+      - monitoring
+    expose:
+      - &#39;8080&#39;
+
+  node_exporter:
+    image: prom/node-exporter:v1.5.0
+    container_name: node-exporter
+    restart: always
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command: 
+      - &#39;--path.procfs=/host/proc&#39; 
+      - &#39;--path.sysfs=/host/sys&#39;
+      - &#39;--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc|rootfs/var/lib/docker)($$|/)&#39;
+    networks:
+      - monitoring
+    ports:
+      - &#39;9100:9100&#39;
+
+  grafana:
+    image: grafana/grafana:9.4.3
+    container_name: grafana
+    restart: always
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning/:/etc/grafana/provisioning/
+    env_file:
+      - ./grafana/config.monitoring
+    networks:
+      - monitoring
+    links:
+      - prometheus
+    ports:
+      - 3000:3000
+    depends_on:
+      - prometheus
+EOF</span>
+</code></pre></div><h4 id="_2-2-通过克隆gitee代码安装-二选一" tabindex="-1"><a class="header-anchor" href="#_2-2-通过克隆gitee代码安装-二选一" aria-hidden="true">#</a> 2.2 通过克隆gitee代码安装（二选一)</h4><p>命令</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code><span class="token function">mkdir</span> /data/
+<span class="token builtin class-name">cd</span> /data/
+<span class="token function">git</span> clone https://gitee.com/linge365/docker-prometheus.git
+<span class="token builtin class-name">cd</span> docker-prometheus
+</code></pre></div><h4 id="_2-3-运行prometheus" tabindex="-1"><a class="header-anchor" href="#_2-3-运行prometheus" aria-hidden="true">#</a> 2.3 运行Prometheus</h4><p>运行命令</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code><span class="token builtin class-name">cd</span> /data/docker-prometheus
+<span class="token function">docker-compose</span> up <span class="token parameter variable">-d</span>
+</code></pre></div><p>检查容器</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code><span class="token function">docker</span> <span class="token function">ps</span>
+</code></pre></div><p>检查端口</p><div class="language-text" data-ext="text"><pre class="language-text"><code>ss -lntp|egrep &quot;3000|9090|9100|9093&quot;
+</code></pre></div><p>web访问地址</p><table><thead><tr><th>应用</th><th>访问地址</th><th>备注</th></tr></thead><tbody><tr><td>Prometheus</td><td>http://10.0.0.112:9090</td><td>无用户和密码</td></tr><tr><td>grafana</td><td>http://10.0.0.112:3000</td><td>admin/password</td></tr><tr><td>alertmanager</td><td>http://10.0.0.112:9093</td><td>无用户和密码</td></tr><tr><td>node-exporter</td><td>http://10.0.0.112:9100/metrics</td><td>无用户和密码</td></tr></tbody></table><h2 id="五、使用grafana9-4-3展示prometheus的图形" tabindex="-1"><a class="header-anchor" href="#五、使用grafana9-4-3展示prometheus的图形" aria-hidden="true">#</a> 五、使用Grafana9.4.3展示Prometheus的图形</h2><h3 id="_1、登录grafana-1" tabindex="-1"><a class="header-anchor" href="#_1、登录grafana-1" aria-hidden="true">#</a> 1、登录Grafana</h3><p>web访问地址</p><table><thead><tr><th>应用</th><th>访问地址</th><th>备注</th></tr></thead><tbody><tr><td>Grafana</td><td>http://10.0.0.112:3000</td><td>默认：admin/password</td></tr></tbody></table><h3 id="_2、创建-prometheus-数据源-1" tabindex="-1"><a class="header-anchor" href="#_2、创建-prometheus-数据源-1" aria-hidden="true">#</a> 2、创建 Prometheus 数据源</h3><p>登录Grafana，Configuration &gt; Data sources，点击 <code>Add new data source</code> 选择 <code>Prometheus</code>，URL：<code>http://prometheus:9090</code>，点击<code>Save &amp; test</code>。</p><blockquote><p>跳转地址：http://10.0.0.112:3000/datasources/new</p></blockquote><h3 id="_3、创建仪表盘-1" tabindex="-1"><a class="header-anchor" href="#_3、创建仪表盘-1" aria-hidden="true">#</a> 3、创建仪表盘</h3><h4 id="_3-1-从-grafana-com-选择仪表板-1" tabindex="-1"><a class="header-anchor" href="#_3-1-从-grafana-com-选择仪表板-1" aria-hidden="true">#</a> 3.1 从 Grafana.com 选择仪表板</h4><p>跳转 https://grafana.com/grafana/dashboards/ 找到 <code>Node Exporter Full</code> 点击进去，点击 <code>Dashboard ID copied!</code> ，获取到 ID：<code>1860</code> 。</p><blockquote><p>跳转地址：https://grafana.com/grafana/dashboards/1860-node-exporter-full/</p></blockquote><h4 id="_3-2-通过id导入仪表板-1" tabindex="-1"><a class="header-anchor" href="#_3-2-通过id导入仪表板-1" aria-hidden="true">#</a> 3.2 通过ID导入仪表板</h4><p>登录Grafana，Dashboards &gt; Import，Import via grafana.com： <code>1860</code>，点击 <code>Load</code>，Name：<code>服务器监控</code>，Prometheus：<code>Prometheus</code>，点击 <code>Import</code>。</p><blockquote><p>跳转地址：http://10.0.0.112:3000/dashboard/import</p></blockquote><h2 id="六、prometheus相关概念" tabindex="-1"><a class="header-anchor" href="#六、prometheus相关概念" aria-hidden="true">#</a> 六、Prometheus相关概念</h2><h3 id="_1、理解时间序列" tabindex="-1"><a class="header-anchor" href="#_1、理解时间序列" aria-hidden="true">#</a> 1、理解时间序列</h3><p>安装好prometheus后会暴露一个 <code>/metrics</code> 的HTTP服务（相当于安装了prometheus_exporter），通过配置（默认会加上/metrics），Prometheus就可以采集到这个 <code>/metrics</code> 里面所有监控样本数据。例如：</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code><span class="token comment"># HELP process_open_fds Number of open file descriptors.</span>
+<span class="token comment"># TYPE process_open_fds gauge</span>
+process_open_fds <span class="token number">25</span>
+</code></pre></div><h4 id="_1-1-样本" tabindex="-1"><a class="header-anchor" href="#_1-1-样本" aria-hidden="true">#</a> 1.1 样本</h4><p>Prometheus 会将所有采集到的监控样本数据以时间序列的方式保存在 <code>内存数据库</code>中，并且定时保存到硬盘上。时间序列是按照时间戳和值的序列顺序存放的，我们称之为向量(vector)，每条时间序列通过指标名称(metrics name)和一组标签集(label)命名。如下所示，可以将时间序列理解为一个以时间为X轴的数字矩阵：</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code>∧
+<span class="token operator">|</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>    process_open_fds
+<span class="token operator">|</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>    node_cpu_seconds_total<span class="token punctuation">{</span>cpu<span class="token operator">=</span><span class="token string">&quot;cpu0&quot;</span>,mode<span class="token operator">=</span><span class="token string">&quot;system&quot;</span><span class="token punctuation">}</span> 
+<span class="token operator">|</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>    node_load1<span class="token punctuation">{</span><span class="token punctuation">}</span> 
+<span class="token operator">|</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>    
+∨
+  <span class="token operator">&lt;</span>-------- 时间 --------<span class="token operator">&gt;</span>
+</code></pre></div><p>在时间序列中的每一个点称为一个样本（sample），样本由以下三部分组成：</p><ul><li>指标(metric)：指标名和描述当前样本特征的标签集合</li><li>时间戳(timestamp)：一个精确到毫秒的时间戳</li><li>样本值(value)：一个float64的浮点型数据表示当前样本的值</li></ul><p>如下所示：</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code>process_open_fds <span class="token number">27</span>
+</code></pre></div><div class="language-bash" data-ext="sh"><pre class="language-bash"><code><span class="token operator">&lt;</span>--------------- metric ---------------------<span class="token operator">&gt;</span><span class="token operator">&lt;</span>-timestamp-<span class="token operator">&gt;</span><span class="token operator">&lt;</span>-value-<span class="token operator">&gt;</span>
+process_open_fds<span class="token punctuation">{</span>status<span class="token operator">=</span><span class="token string">&quot;9090&quot;</span>, <span class="token assign-left variable">job</span><span class="token operator">=</span><span class="token string">&quot;prometheus&quot;</span><span class="token punctuation">}</span> @1434417560938 <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token number">39</span>
+process_open_fds<span class="token punctuation">{</span>status<span class="token operator">=</span><span class="token string">&quot;9090&quot;</span>, <span class="token assign-left variable">job</span><span class="token operator">=</span><span class="token string">&quot;prometheus&quot;</span><span class="token punctuation">}</span> @1434417561287 <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token number">33</span>
+process_open_fds<span class="token punctuation">{</span>status<span class="token operator">=</span><span class="token string">&quot;9090&quot;</span>, <span class="token assign-left variable">job</span><span class="token operator">=</span><span class="token string">&quot;prometheus&quot;</span><span class="token punctuation">}</span> @1434417560938 <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token number">35</span>
+process_open_fds<span class="token punctuation">{</span>status<span class="token operator">=</span><span class="token string">&quot;9090&quot;</span>, <span class="token assign-left variable">job</span><span class="token operator">=</span><span class="token string">&quot;prometheus&quot;</span><span class="token punctuation">}</span> @1434417561287 <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token number">37</span>
+process_open_fds<span class="token punctuation">{</span>status<span class="token operator">=</span><span class="token string">&quot;9090&quot;</span>, <span class="token assign-left variable">job</span><span class="token operator">=</span><span class="token string">&quot;prometheus&quot;</span><span class="token punctuation">}</span> @1434417560938 <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token number">36</span>
+process_open_fds<span class="token punctuation">{</span>status<span class="token operator">=</span><span class="token string">&quot;9090&quot;</span>, <span class="token assign-left variable">job</span><span class="token operator">=</span><span class="token string">&quot;prometheus&quot;</span><span class="token punctuation">}</span> @1434417561287 <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token number">25</span>
+<span class="token operator">&lt;</span>--metric_name--<span class="token operator">&gt;</span><span class="token operator">&lt;</span>---------lable---------------<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span>--metric_name--<span class="token operator">&gt;</span><span class="token operator">&lt;</span>--value--<span class="token operator">&gt;</span>  <span class="token operator">&lt;</span>name<span class="token operator">&gt;</span><span class="token operator">&lt;</span>--value--<span class="token operator">&gt;</span>
+</code></pre></div><h4 id="_1-2-指标-metric" tabindex="-1"><a class="header-anchor" href="#_1-2-指标-metric" aria-hidden="true">#</a> 1.2 指标(Metric)</h4><p>在形式上，所有的指标（Matric)都通过如下格式标示：</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code><span class="token operator">&lt;</span>metric name<span class="token operator">&gt;</span><span class="token punctuation">{</span><span class="token operator">&lt;</span>label name<span class="token operator">&gt;=</span><span class="token operator">&lt;</span>label value<span class="token operator">&gt;</span>, <span class="token punctuation">..</span>.<span class="token punctuation">}</span>
+</code></pre></div><p>指标的名称(metric name)可以反映被监控样本的含义（比如，<code>process_open_fds</code> - 表示当前系统打开的文件描述符）。指标名称只能由 ASCII 字符、数字、下划线以及冒号组成并必须符合正则表达式 [a-zA-Z_:][a-zA-Z0-9_:]*。</p><p>标签(label)反映了当前样本的特征维度，通过这些维度 Prometheus 可以对样本数据进行过滤，聚合等。标签的名称只能由 ASCII 字符、数字以及下划线组成并满足正则表达式 [a-zA-Z_][a-zA-Z0-9_]*。</p><p>其中以 <code>__</code> 作为前缀的标签，是系统保留的关键字，只能在系统内部使用，标签的值则可以包含任何 Unicode 编码的字符。在Prometheus的底层实现中指标名称实际上是以<code>__name__=&lt;metric name&gt;</code>的形式保存在数据库中的，因此以下两种方式均表示的同一条time-series：</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code>prcess_open_fds<span class="token punctuation">{</span>instance<span class="token operator">=</span><span class="token string">&quot;localhost:9090&quot;</span>, <span class="token assign-left variable">job</span><span class="token operator">=</span><span class="token string">&quot;prometheus&quot;</span><span class="token punctuation">}</span>
+</code></pre></div><p>等同于：</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code><span class="token punctuation">{</span>__name__<span class="token operator">=</span><span class="token string">&quot;process_open_fds&quot;</span>,instance<span class="token operator">=</span><span class="token string">&quot;localhost:9090&quot;</span>, <span class="token assign-left variable">job</span><span class="token operator">=</span><span class="token string">&quot;prometheus&quot;</span><span class="token punctuation">}</span>
+</code></pre></div><h3 id="_2、指标-metric-的4种类型" tabindex="-1"><a class="header-anchor" href="#_2、指标-metric-的4种类型" aria-hidden="true">#</a> 2、指标(Metric)的4种类型</h3><p>Prometheus 底层存储上其实并没有对指标做类型的区分，都是以时间序列的形式存储，但是为了方便用户的使用和理解不同监控指标之间的差异，Prometheus 定义了 counter（计数器）、gauge（仪表盘）、histogram（直方图）以及summary（摘要）这四种 Metrics 类型。</p><p><strong>Gauge/Counter是数值指标，代表数据的变化情况，Histogram/Summary是统计类型的指标，表示数据的分布情况</strong></p><p>在Exporter返回的样本数据中，其注释中也包含了该样本的类型。例如：</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code><span class="token comment"># HELP process_resident_memory_bytes Resident memory size in bytes.</span>
+<span class="token comment"># TYPE process_resident_memory_bytes gauge</span>
+process_resident_memory_bytes <span class="token number">1</span>.3586432e+08
+</code></pre></div><h4 id="_2-1-counter-只增不减的计数器" tabindex="-1"><a class="header-anchor" href="#_2-1-counter-只增不减的计数器" aria-hidden="true">#</a> 2.1 Counter：只增不减的计数器</h4><p>Counter类型的指标其工作方式和计数器一样，只增不减（除非系统发生重置）。常见的监控指标，如http_requests_total，node_cpu都是Counter类型的监控指标。一般在定义Counter类型指标的名称时推荐使用_total作为后缀。</p><p>通过 Counter 指标可以统计HTTP请求数量，请求错误数，接口调用次数等单调递增的数据，同时可结合<code>increase</code> 和 <code>rate</code> 等函数统计变化速率</p><p>例如，通过PromQL内置的聚合rate()函数获取HTTP请求量的评价增长率：</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code>rate<span class="token punctuation">(</span>prometheus_http_requests_total<span class="token punctuation">[</span>5m<span class="token punctuation">]</span><span class="token punctuation">)</span>
+</code></pre></div><p>查询当前系统中，访问量前10的HTTP地址：</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code>topk<span class="token punctuation">(</span><span class="token number">10</span>, prometheus_http_requests_total<span class="token punctuation">)</span>
+</code></pre></div><p>对于Gauge类型的监控指标，通过PromQL内置函数delta()可以获取样本在一段时间返回内的变化情况。例如，计算CPU温度在两个小时内的差异：</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code>delta<span class="token punctuation">(</span>cpu_temp_celsius<span class="token punctuation">{</span>host<span class="token operator">=</span><span class="token string">&quot;zeus&quot;</span><span class="token punctuation">}</span><span class="token punctuation">[</span>2h<span class="token punctuation">]</span><span class="token punctuation">)</span>
+</code></pre></div><p>还可以使用deriv()计算样本的线性回归模型，甚至是直接使用predict_linear()对数据的变化趋势进行预测。例如，预测系统磁盘空间在4个小时之后的剩余情况：</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code>predict_linear<span class="token punctuation">(</span>node_filesystem_avail_bytes<span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">[</span>1h<span class="token punctuation">]</span>, <span class="token number">4</span> * <span class="token number">3600</span><span class="token punctuation">)</span>
+</code></pre></div><p>使用Histogram（直方图）和Summary（摘要）分析数据分布情况</p><p>除了Counter和Gauge类型的监控指标以外，Prometheus还定义了Histogram和Summary的指标类型。Histogram和Summary主用用于统计和分析样本的分布情况。</p><p>在大多数情况下人们都倾向于使用某些量化指标的平均值，例如CPU的平均使用率、页面的平均响应时间。这种方式的问题很明显，以系统APl调用的平均响应时间为例：如果大多数APl请求都维持在100ms的响应时间范围内，而个别请求的响应时间需要5s，那么就会导致某些WEB页面的响应时间落到中位数的情况，而这种现象被称为长尾问题。</p><p>为了区分是平均的慢还是长尾的慢，最简单的方式就是按照请求延迟的范围进行分组。例如，统计延迟在0～10ms之间的请求数有多少而10~20ms之间的请求数又有多少。通过这种方式可以快速分析系统慢的原因。Histogram和Summary都是为了能够解决这样问题的存在，通过Histogram和Summary类型的监控指标，我们可以快速了解监控样本的分布情况。</p><p>例如，指标prometheus_tsdb_wal_fsync_duration_seconds的指标类型为Summary。它记录了Promdtheus Server中wal_fsync处理的处理时间，通过访问Prometheus Server的/metrics地址，可以获取到以下监控样本数据：</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code><span class="token comment"># HELP prometheus_tsdb_wal_fsync_duration_seconds Duration of WAL fsync.</span>
+<span class="token comment"># TYPE prometheus_tsdb_wal_fsync_duration_seconds summary</span>
+prometheus_tsdb_wal_fsync_duration_seconds<span class="token punctuation">{</span>quantile<span class="token operator">=</span><span class="token string">&quot;0.5&quot;</span><span class="token punctuation">}</span> <span class="token number">0.012352463</span>
+prometheus_tsdb_wal_fsync_duration_seconds<span class="token punctuation">{</span>quantile<span class="token operator">=</span><span class="token string">&quot;0.9&quot;</span><span class="token punctuation">}</span> <span class="token number">0.014458005</span>
+prometheus_tsdb_wal_fsync_duration_seconds<span class="token punctuation">{</span>quantile<span class="token operator">=</span><span class="token string">&quot;0.99&quot;</span><span class="token punctuation">}</span> <span class="token number">0.017316173</span>
+prometheus_tsdb_wal_fsync_duration_seconds_sum <span class="token number">2.888716127000002</span>
+prometheus_tsdb_wal_fsync_duration_seconds_count <span class="token number">216</span>
+</code></pre></div><p>从上面的样本中可以得知当前Prometheus Server进行wal_fsync操作的总次数为216次，耗时2.888716127000002s。其中中位数（quantile=0.5）的耗时为0.012352463,9分位数（quantile=0.9）的耗时为0.014458005s。</p><p>在Prometheus Server自身返回的样本数据中，我们还能找到类型为Histogram的监控指标</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code><span class="token comment"># HELP prometheus_tsdb_compaction_chunk_range_seconds Final time range of chunks on their first compaction</span>
+<span class="token comment"># TYPE prometheus_tsdb_compaction_chunk_range_seconds histogram</span>
+prometheus_tsdb_compaction_chunk_range_seconds_bucket<span class="token punctuation">{</span>le<span class="token operator">=</span><span class="token string">&quot;100&quot;</span><span class="token punctuation">}</span> <span class="token number">0</span>
+prometheus_tsdb_compaction_chunk_range_seconds_bucket<span class="token punctuation">{</span>le<span class="token operator">=</span><span class="token string">&quot;400&quot;</span><span class="token punctuation">}</span> <span class="token number">0</span>
+prometheus_tsdb_compaction_chunk_range_seconds_bucket<span class="token punctuation">{</span>le<span class="token operator">=</span><span class="token string">&quot;1600&quot;</span><span class="token punctuation">}</span> <span class="token number">0</span>
+prometheus_tsdb_compaction_chunk_range_seconds_bucket<span class="token punctuation">{</span>le<span class="token operator">=</span><span class="token string">&quot;6400&quot;</span><span class="token punctuation">}</span> <span class="token number">0</span>
+prometheus_tsdb_compaction_chunk_range_seconds_bucket<span class="token punctuation">{</span>le<span class="token operator">=</span><span class="token string">&quot;25600&quot;</span><span class="token punctuation">}</span> <span class="token number">0</span>
+prometheus_tsdb_compaction_chunk_range_seconds_bucket<span class="token punctuation">{</span>le<span class="token operator">=</span><span class="token string">&quot;102400&quot;</span><span class="token punctuation">}</span> <span class="token number">0</span>
+prometheus_tsdb_compaction_chunk_range_seconds_bucket<span class="token punctuation">{</span>le<span class="token operator">=</span><span class="token string">&quot;409600&quot;</span><span class="token punctuation">}</span> <span class="token number">0</span>
+prometheus_tsdb_compaction_chunk_range_seconds_bucket<span class="token punctuation">{</span>le<span class="token operator">=</span><span class="token string">&quot;1.6384e+06&quot;</span><span class="token punctuation">}</span> <span class="token number">0</span>
+prometheus_tsdb_compaction_chunk_range_seconds_bucket<span class="token punctuation">{</span>le<span class="token operator">=</span><span class="token string">&quot;6.5536e+06&quot;</span><span class="token punctuation">}</span> <span class="token number">0</span>
+prometheus_tsdb_compaction_chunk_range_seconds_bucket<span class="token punctuation">{</span>le<span class="token operator">=</span><span class="token string">&quot;2.62144e+07&quot;</span><span class="token punctuation">}</span> <span class="token number">0</span>
+prometheus_tsdb_compaction_chunk_range_seconds_bucket<span class="token punctuation">{</span>le<span class="token operator">=</span><span class="token string">&quot;+Inf&quot;</span><span class="token punctuation">}</span> <span class="token number">0</span>
+prometheus_tsdb_compaction_chunk_range_seconds_sum <span class="token number">3</span>.91254640158e+11
+prometheus_tsdb_compaction_chunk_range_seconds_count <span class="token number">217695</span>
+</code></pre></div><p>与Summary类型的指标相似之处在于Histogram类型的样本同样会反应当前指标的记录的总数（以_count作为后缀）以及其值的总量（以_sum作为后缀）。不同在于Histogram指标直接反应了在不同区间内样本的个数，区间通过标签len进行定义。</p><p>同时对于Histogram的指标，我们还可以通过histogram_quantile()函数计算出其值的分位数。不同在于Histogram通过histogram_quantile函数是在服务器端计算的分位数。而Sumamry的分位数则是直接在客户端计算完成。因此对于分位数的计算而言，Summary在通过PromQL进行查询时有更好的性能表现，而Histogram则会消耗更多的资源。反之对于客户端而言Histogram消耗的资源更少。在选择这两种方式时用户应该按照自己的实际场景进行选择。</p><p>需要特别注意的是,假设采样数据 metric 叫做 x(指标名)，如果 × 是 histogram 或 summary 类型必需满足以下条件：</p><ul><li>采样数据的总和应表示为 x_sum 。</li><li>采样数据的总量应表示为 x_countl 。</li><li>summary 类型的采样数据的quantile应表示为 x{quantile=&quot;y&quot;}。</li><li>histogram 类型的采样分区统计数据将表示为 x_bucket{le=&quot;y&quot;}。</li><li>histogram 类型的采样必须包含 x_bucket{le=&quot;+Inf&quot;}，它的值等于 x_count 的值。</li><li>summary 和 historam 中 quantile 和 le 必需按从小到大顺序排列。</li></ul><h3 id="_3、job-任务-和instances-实例" tabindex="-1"><a class="header-anchor" href="#_3、job-任务-和instances-实例" aria-hidden="true">#</a> 3、job（任务）和instances（实例）</h3><h4 id="_3-1-概述" tabindex="-1"><a class="header-anchor" href="#_3-1-概述" aria-hidden="true">#</a> 3.1 概述</h4><p>在Prometheus中，任何被采集的目标，即每一个暴露监控样本数据的HTTP服务都称为一个实例（Instance），例如在当前主机上运行的node exporter可以被称为一个实例(Instance)。而具有相同采集目的的实例集合称为任务（Job）。</p><h4 id="_3-2-job-任务" tabindex="-1"><a class="header-anchor" href="#_3-2-job-任务" aria-hidden="true">#</a> 3.2 job（任务）</h4><p>例如，以下2个复制实例的node作业：</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code>* job: <span class="token function">node</span>
+    * instance <span class="token number">2</span>: <span class="token number">1.2</span>.3.4:9100
+    * instance <span class="token number">4</span>: <span class="token number">5.6</span>.7.8:9100
+</code></pre></div><h4 id="_3-3-instances-实例" tabindex="-1"><a class="header-anchor" href="#_3-3-instances-实例" aria-hidden="true">#</a> 3.3 instances（实例）</h4><p>通过在prometheus.yml配置文件中，添加如下配置。我们让Prometheus可以从node exporter暴露的服务中获取监控指标数据。</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code>scrape_configs:
+  - job_name: <span class="token string">&#39;prometheus&#39;</span>
+    static_configs:
+      - targets: <span class="token punctuation">[</span><span class="token string">&#39;localhost:9090&#39;</span><span class="token punctuation">]</span>
+  - job_name: <span class="token string">&#39;alertmanager&#39;</span>
+    static_configs:
+      - targets: <span class="token punctuation">[</span><span class="token string">&#39;alertmanager:9093&#39;</span><span class="token punctuation">]</span> 
+  - job_name: <span class="token string">&#39;node-exporter&#39;</span>
+    static_configs:
+      - targets:
+        - node-exporter:9100
+        - <span class="token number">10.0</span>.0.112:9100
+</code></pre></div><p>当我们需要采集不同的监控指标（例如：主机、MySQL、Nginx）时，我们只需要运行相应的监控采集程序，在Prometheus Server配置这些Exporter实例的访问地址。</p><h4 id="_3-4-实例的状态" tabindex="-1"><a class="header-anchor" href="#_3-4-实例的状态" aria-hidden="true">#</a> 3.4 实例的状态</h4><p>除了通过使用“up”表达式查询当前所有Instance的状态以外，还可以通过Prometheus UI中的<a href="http://10.0.0.112:9090/targets" target="_blank" rel="noopener noreferrer">Targets<span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">open in new window</span></span></a>页面查看当前所有的监控采集任务，以及各个任务下所有实例的状态。</p><h2 id="七、exporter" tabindex="-1"><a class="header-anchor" href="#七、exporter" aria-hidden="true">#</a> 七、Exporter</h2><h3 id="_1、概述-1" tabindex="-1"><a class="header-anchor" href="#_1、概述-1" aria-hidden="true">#</a> 1、概述</h3><p>所有可以向Prometheus提供监控样本数据的程序都可以被称为一个Exporter。而Exporter的一个实例称为target，如下所示，Prometheus通过轮询的方式定期从这些target中获取样本数据。</p><p>注：安装好Exporter后会暴露一个 <code>http://ip:端口/metrics</code> 的HTTP服务，通过Prometheus添加配置 <code>- targets: [&#39;node_exporter:9100&#39;]</code> （默认会加上/metrics），Prometheus就可以采集到这个 <code>http://ip:端口/metrics</code> 里面所有监控样本数据</p><h3 id="_2、exporter的来源" tabindex="-1"><a class="header-anchor" href="#_2、exporter的来源" aria-hidden="true">#</a> 2、Exporter的来源</h3><p>从Exporter的来源上来讲，主要分为两类：</p><h4 id="_2-1-社区提供的" tabindex="-1"><a class="header-anchor" href="#_2-1-社区提供的" aria-hidden="true">#</a> 2.1 社区提供的</h4><ul><li>社区提供的（https://prometheus.io/docs/instrumenting/exporters/）</li></ul><p>Prometheus社区提供了丰富的Exporter实现，涵盖了从基础设施，中间件以及网络等各个方面的监控功能。这些Exporter可以实现大部分通用的监控需求。下表列举一些社区中常用的Exporter：</p><table><thead><tr><th>范围</th><th>常用Exporter</th></tr></thead><tbody><tr><td>数据库</td><td>MySQL Exporter, Redis Exporter, MongoDB Exporter, MSSQL Exporter等</td></tr><tr><td>硬件</td><td>Apcupsd Exporter，IoT Edison Exporter， IPMI Exporter, Node Exporter等</td></tr><tr><td>消息队列</td><td>Beanstalkd Exporter, Kafka Exporter, NSQ Exporter, RabbitMQ Exporter等</td></tr><tr><td>存储</td><td>Ceph Exporter, Gluster Exporter, HDFS Exporter, ScaleIO Exporter等</td></tr><tr><td>HTTP服务</td><td>Apache Exporter, HAProxy Exporter, Nginx Exporter等</td></tr><tr><td>API服务</td><td>AWS ECS Exporter， Docker Cloud Exporter, Docker Hub Exporter, GitHub Exporter等</td></tr><tr><td>日志</td><td>Fluentd Exporter, Grok Exporter等</td></tr><tr><td>监控系统</td><td>Collectd Exporter, Graphite Exporter, InfluxDB Exporter, Nagios Exporter, SNMP Exporter等</td></tr><tr><td>其它</td><td>Blockbox Exporter, JIRA Exporter, Jenkins Exporter， Confluence Exporter等</td></tr></tbody></table><h4 id="_2-2-用户自定义的" tabindex="-1"><a class="header-anchor" href="#_2-2-用户自定义的" aria-hidden="true">#</a> 2.2 用户自定义的</h4><p>除了直接使用社区提供的Exporter程序以外，用户还可以基于Prometheus提供的Client Library创建自己的Exporter程序，目前Promthues社区官方提供了对以下编程语言的支持：Go、Java/Scala、Python、Ruby。同时还有第三方实现的如：Bash、C++、Common Lisp、Erlang、Haskeel、Lua、Node.js、PHP、Rust等。</p><h3 id="_3、exporter-类型" tabindex="-1"><a class="header-anchor" href="#_3、exporter-类型" aria-hidden="true">#</a> 3、Exporter 类型</h3><p>通常来说可以将要 Exporter 分为两类：</p><ul><li>直接采集型。</li></ul><p>这类 Exporter 直接内置了相应的应用程序，用于向 Prometheus 直接提供 target 数据支持。这样设计的好处是，可以更好地监控各自系统的内部运行状态，同时也适合更多自定义监控指标的项目实施。如 cAdvisor、Kubernetes 等，它们均内置了用于向 Prometheus 提供监控数据的端点。</p><ul><li>间接采集型</li></ul><p>原始监控目标并不直接支持 Prometheus，需要我们使用 Prometheus 提供的 Client Libary 编写该监控目标的监控采集程序，用户可以将该程序独立运行，去获取指定的各类监控数据监控值。比如 Node exporter，还有 Nginx exporter，以及数据库或网站 HTTP 应用类的 Expoter 等</p><h3 id="_4、exporter规范" tabindex="-1"><a class="header-anchor" href="#_4、exporter规范" aria-hidden="true">#</a> 4、Exporter规范</h3><p>所有的Exporter程序都需要按照Prometheus的规范，返回监控的样本数据。以Node Exporter为例，当访问http://10.0.0.112:9100/metrics地址时会返回以下内容：</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code><span class="token comment"># HELP go_gc_duration_seconds A summary of the pause duration of garbage collection cycles.</span>
+<span class="token comment"># TYPE go_gc_duration_seconds summary</span>
+go_gc_duration_seconds<span class="token punctuation">{</span>quantile<span class="token operator">=</span><span class="token string">&quot;0&quot;</span><span class="token punctuation">}</span> <span class="token number">2</span>.9605e-05
+go_gc_duration_seconds<span class="token punctuation">{</span>quantile<span class="token operator">=</span><span class="token string">&quot;0.25&quot;</span><span class="token punctuation">}</span> <span class="token number">3</span>.4527e-05
+go_gc_duration_seconds<span class="token punctuation">{</span>quantile<span class="token operator">=</span><span class="token string">&quot;0.5&quot;</span><span class="token punctuation">}</span> <span class="token number">4</span>.2471e-05
+
+<span class="token comment"># HELP node_cpu_seconds_total Seconds the CPUs spent in each mode.</span>
+<span class="token comment"># TYPE node_cpu_seconds_total counter</span>
+node_cpu_seconds_total<span class="token punctuation">{</span>cpu<span class="token operator">=</span><span class="token string">&quot;0&quot;</span>,mode<span class="token operator">=</span><span class="token string">&quot;idle&quot;</span><span class="token punctuation">}</span> <span class="token number">78791.45</span>
+</code></pre></div><p>以#开始的行通常都是注释内容。这些样本数据集合说明如下：</p><ul><li>以#HELP开始的行，表示metric的帮助与说明注释，可以包含当前监控指标名称和对应的说明信息。</li><li>以#TYPE开始的行，表示定义metric类型，可以包含当前监控指标名称和类型，类型有Counter、Gauge、Histogram、Summary和Untyped。</li><li>非#开头的行，就是监控样本数据</li></ul><h4 id="_4-1-监控样本数据规范" tabindex="-1"><a class="header-anchor" href="#_4-1-监控样本数据规范" aria-hidden="true">#</a> 4.1 监控样本数据规范</h4><div class="language-bash" data-ext="sh"><pre class="language-bash"><code>metric_name <span class="token punctuation">[</span> <span class="token string">&quot;{&quot;</span> label_name <span class="token string">&quot;=&quot;</span> <span class="token variable"><span class="token variable">`</span>&quot;<span class="token variable">`</span></span> label_value <span class="token variable"><span class="token variable">`</span>&quot;<span class="token variable">`</span></span> <span class="token punctuation">{</span> <span class="token string">&quot;,&quot;</span> label_name <span class="token string">&quot;=&quot;</span> <span class="token variable"><span class="token variable">`</span>&quot;<span class="token variable">`</span></span> label_value <span class="token variable"><span class="token variable">`</span>&quot;<span class="token variable">`</span></span> <span class="token punctuation">}</span> <span class="token punctuation">[</span> <span class="token string">&quot;,&quot;</span> <span class="token punctuation">]</span> <span class="token string">&quot;}&quot;</span> <span class="token punctuation">]</span> value <span class="token punctuation">[</span> timestamp <span class="token punctuation">]</span>
+</code></pre></div><p>其中metric_name和label_name必须遵循PromQL的格式规范要求。value是一个float格式的数据，timestamp的类型为int64（从1970-01-01 00:00:00以来的毫秒数），timestamp为可选默认为当前时间。具有相同metric_name的样本必须按照一个组的形式排列，并且每一行必须是唯一的指标名称和标签键值对组合。</p><div class="language-bash" data-ext="sh"><pre class="language-bash"><code>go_memstats_mcache_sys_bytes<span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token number">15600</span>
+go_memstats_mcache_sys_bytes<span class="token punctuation">{</span>instance<span class="token operator">=</span><span class="token string">&quot;localhost:9090&quot;</span>, <span class="token assign-left variable">job</span><span class="token operator">=</span><span class="token string">&quot;prometheus&quot;</span><span class="token punctuation">}</span> timestamp VALUE
+</code></pre></div></div><!--[--><!--]--></div><footer class="page-meta"><!----><!----><!----></footer><!----><!--[--><!--]--></main><!--]--></div><!----><!--]--></div>
+    <script type="module" src="/assets/app-685742c3.js" defer></script>
+  </body>
+</html>
